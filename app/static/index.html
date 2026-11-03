@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>摄像头变焦测试 · shot</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>摄像头变焦测试</h1>
+    <p class="sub">0.5x · 1.0x · 2.0x · 3.0x · 5.0x <span class="dot">·</span> HarmonyOS / 华为</p>
+  </div>
+  <a class="admin" href="/admin" title="日志后台">日志</a>
+</header>
+
+<main>
+  <section class="stage" id="stage">
+    <video id="video" playsinline autoplay muted></video>
+    <div class="placeholder" id="placeholder">
+      <div class="ph-icon">◉</div>
+      <p>点击「开始测试」授权摄像头</p>
+      <p class="tiny">需要 HTTPS 才能调用摄像头</p>
+    </div>
+    <div class="badge" id="badge">未开始</div>
+    <div class="hud" id="hud" hidden></div>
+  </section>
+
+  <div class="actions">
+    <button id="btnStart" class="primary">开始测试</button>
+    <button id="btnStop" class="ghost" hidden>停止</button>
+  </div>
+
+  <div class="zoom-grid" id="zoomGrid">
+    <button class="zoom" data-zoom="0.5"><b>0.5x</b><span>超广角</span></button>
+    <button class="zoom" data-zoom="1"><b>1.0x</b><span>主摄</span></button>
+    <button class="zoom" data-zoom="2"><b>2.0x</b><span>长焦/裁切</span></button>
+    <button class="zoom" data-zoom="3"><b>3.0x</b><span>长焦</span></button>
+    <button class="zoom" data-zoom="5"><b>5.0x</b><span>长焦</span></button>
+  </div>
+
+  <div class="row">
+    <label class="sel">
+      <span>摄像头</span>
+      <select id="deviceSelect" disabled><option>未授权</option></select>
+    </label>
+    <button id="btnShot" class="ghost" disabled>拍照存证</button>
+  </div>
+
+  <div class="actions">
+    <button id="btnAuto" class="warn" disabled>一键全流程测试</button>
+  </div>
+
+  <details class="panel" open>
+    <summary>诊断信息 <button id="btnCopyEnv" class="mini" type="button">复制</button></summary>
+    <dl id="envList" class="env"><dd class="muted">尚未开始</dd></dl>
+  </details>
+
+  <details class="panel">
+    <summary>运行日志 <span id="logCount" class="pill">0</span>
+      <button id="btnDownloadLog" class="mini" type="button">下载</button>
+      <button id="btnUploadLog" class="mini" type="button">立即上传</button>
+    </summary>
+    <pre id="logView" class="log"></pre>
+  </details>
+
+  <p class="foot">
+    会话 <code id="sessionId">-</code> · <span id="uploadState">待上传</span><br>
+    本页仅用于相机变焦能力测试，日志与照片保存在测试服务器上，测试结束后会整体删除。
+  </p>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

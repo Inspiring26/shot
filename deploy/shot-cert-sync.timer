@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically sync shot-cam TLS certificate
+
+[Timer]
+OnBootSec=45s
+OnUnitActiveSec=10min
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

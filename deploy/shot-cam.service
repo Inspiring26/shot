@@ -1,0 +1,27 @@
+[Unit]
+Description=shot - camera zoom test page (temporary, port 8082)
+Documentation=https://github.com/Inspiring26/shot
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=shotcam
+Group=shotcam
+WorkingDirectory=/opt/shot
+# 以 root 同步证书到 /opt/shot/tls（Caddy 的证书仅 root 可读）
+ExecStartPre=+/opt/shot/bin/sync-cert.sh
+ExecStart=/usr/bin/python3 /opt/shot/app/main.py --port 8082 --root /opt/shot
+Restart=always
+RestartSec=2
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/shot/logs /opt/shot/tls
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

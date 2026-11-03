@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync Let's Encrypt IP certificate for shot-cam
+
+[Service]
+Type=oneshot
+ExecStart=/opt/shot/bin/sync-cert.sh
