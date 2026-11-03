@@ -20,6 +20,7 @@ SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PREFIX="${SHOT_ROOT:-/opt/shot}"
 SVC_USER="${SHOT_USER:-shotcam}"
 PORT="${SHOT_PORT:-8082}"
+HOST_IP="${SHOT_HOST_IP:-8.137.124.107}"
 
 say() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 
@@ -65,7 +66,13 @@ else
   echo "警告: 未找到 /opt/stream/Caddyfile，跳过证书配置（需自行提供 $PREFIX/tls/fullchain.pem）" >&2
 fi
 
-say "同步证书"
+say "等待 Caddy 签发/续期 IP 证书（首次约 10~60 秒）"
+for _i in $(seq 1 40); do
+  if find /var/lib/docker/volumes -maxdepth 8 -type d -path "*/certificates/*/$HOST_IP" -name "$HOST_IP" 2>/dev/null | grep -q .; then
+    break
+  fi
+  sleep 3
+done
 "$PREFIX/bin/sync-cert.sh" || true
 
 # 4. systemd -----------------------------------------------------------

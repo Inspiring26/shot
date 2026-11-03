@@ -3,6 +3,8 @@ Description=shot - camera zoom test page (temporary, port 8082)
 Documentation=https://github.com/Inspiring26/shot
 After=network-online.target docker.service
 Wants=network-online.target
+# 证书尚未就绪时允许无限重试，避免触发 systemd 启动频率限制
+StartLimitIntervalSec=0
 
 [Service]
 Type=simple

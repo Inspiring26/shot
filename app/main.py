@@ -257,8 +257,7 @@ class Handler(BaseHTTPRequestHandler):
         ext = os.path.splitext(full)[1].lower()
         with open(full, "rb") as f:
             body = f.read()
-        extra = {"Cache-Control": "no-cache"} if ext == ".html" else {"Cache-Control": "max-age=60"}
-        return self._send(200, body, MIME.get(ext, "application/octet-stream"), extra)
+        return self._send(200, body, MIME.get(ext, "application/octet-stream"))
 
     # ---- 日志接收 ---------------------------------------------------
     def _api_log(self):

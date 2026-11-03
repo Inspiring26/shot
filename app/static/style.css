@@ -19,7 +19,7 @@ h1{font-size:20px;margin:0;letter-spacing:.2px}
 .admin:hover{color:var(--text);border-color:#3a4257}
 
 .stage{position:relative;background:#000;border-radius:16px;overflow:hidden;
-  aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  aspect-ratio:4/5;max-height:58vh;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
 #video{width:100%;height:100%;object-fit:cover;display:none;transform-origin:50% 50%}
 #video.on{display:block}
 .placeholder{text-align:center;color:var(--muted);padding:20px}
@@ -44,11 +44,11 @@ button.primary{background:linear-gradient(180deg,#4a95ff,#2f74e0)}
 button.ghost{background:#1b2130;border:1px solid var(--line)}
 button.warn{background:linear-gradient(180deg,#f0a63a,#d98a1e);color:#241703}
 
-.zoom-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 12px}
-.zoom{background:#161b27;border:1px solid var(--line);padding:9px 2px;border-radius:12px;
+.zoom-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:4px 0 12px}
+.zoom{background:#161b27;border:1px solid var(--line);padding:9px 2px;border-radius:12px;min-width:0;
   display:flex;flex-direction:column;align-items:center;gap:1px}
-.zoom b{font-size:15px}
-.zoom span{font-size:9px;color:var(--muted)}
+.zoom b{font-size:14px}
+.zoom span{font-size:8.5px;color:var(--muted);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .zoom.active{border-color:var(--accent);background:#1d2a44}
 .zoom.ok{border-color:rgba(46,204,113,.55)}
 .zoom.fail{border-color:rgba(255,92,92,.5);opacity:.75}
